@@ -1,4 +1,6 @@
+import { relations } from "drizzle-orm";
 import { pgTable, text, timestamp, boolean, serial } from "drizzle-orm/pg-core";
+import { workFlow } from "./workFlow";
 
 export const user = pgTable("user", {
 	id: text("id").primaryKey(),
@@ -9,6 +11,10 @@ export const user = pgTable("user", {
 	createdAt: timestamp("created_at").notNull(),
 	updatedAt: timestamp("updated_at").notNull(),
 });
+
+export const usersRelations = relations(user, ({ many }) => ({
+	workFlows: many(workFlow),
+}));
 
 export const session = pgTable("session", {
 	id: text("id").primaryKey(),

@@ -1,8 +1,24 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import type { Context } from "./context";
 
-export const t = initTRPC.context<Context>().create();
+export const t = initTRPC.context<Context>().create({
+	errorFormatter({ error }) {
+    return {
+      success: false,
+      error: error.message,
+      data: null,
+    };
+  },
+});
 
+// Success wrapper helper
+export function wrapSuccess<T>(data: T) {
+  return {
+    success: true,
+    error: null,
+    data,
+  };
+}
 export const router = t.router;
 
 export const publicProcedure = t.procedure;

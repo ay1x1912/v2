@@ -1,4 +1,6 @@
-import { Button } from "@/components/ui/button";
+
+
+import Page from "@/components/dashboard";
 import { authClient } from "@/lib/auth-client";
 import { trpc } from "@/utils/trpc";
 import { useQuery } from "@tanstack/react-query";
@@ -20,15 +22,17 @@ export const Route = createFileRoute("/dashboard")({
 
 function RouteComponent() {
 	const { session } = Route.useRouteContext();
-
+ 
 	const privateData = useQuery(trpc.privateData.queryOptions());
+	
+	const user={
+		name:session.data?.user.name ?? "",
+		email:session.data?.user.email ?? "",
+		avatar:session.data?.user.name ?? "",
 
+	}
+   
 	return (
-		<div>
-			<h1>Dashboard</h1>
-			<p>Welcome {session.data?.user.name}</p>
-			<p>API: {privateData.data?.message}</p>
-			 
-		</div>
+		<Page user={user}/>
 	);
 }

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as HeaderRouteRouteImport } from './routes/_header/route'
 import { Route as IndexRouteImport } from './routes/index'
 
 const LoginRoute = LoginRouteImport.update({
@@ -21,6 +22,10 @@ const LoginRoute = LoginRouteImport.update({
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeaderRouteRoute = HeaderRouteRouteImport.update({
+  id: '/_header',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -42,6 +47,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_header': typeof HeaderRouteRoute
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
 }
@@ -50,11 +56,12 @@ export interface FileRouteTypes {
   fullPaths: '/' | '/dashboard' | '/login'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/dashboard' | '/login'
-  id: '__root__' | '/' | '/dashboard' | '/login'
+  id: '__root__' | '/' | '/_header' | '/dashboard' | '/login'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HeaderRouteRoute: typeof HeaderRouteRoute
   DashboardRoute: typeof DashboardRoute
   LoginRoute: typeof LoginRoute
 }
@@ -75,6 +82,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_header': {
+      id: '/_header'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof HeaderRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +101,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HeaderRouteRoute: HeaderRouteRoute,
   DashboardRoute: DashboardRoute,
   LoginRoute: LoginRoute,
 }

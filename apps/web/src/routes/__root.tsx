@@ -44,7 +44,9 @@ function RootComponent() {
 	const isFetching = useRouterState({
 		select: (s) => s.isLoading,
 	});
-
+	const routerState=useRouterState()
+	const hideHeader=routerState.location.pathname.includes("/dashboard")
+ console.log(hideHeader);
 	return (
 		<>
 			<HeadContent />
@@ -55,7 +57,7 @@ function RootComponent() {
 				storageKey="vite-ui-theme"
 			>
 				<div className="grid grid-rows-[auto_1fr] h-svh">
-					<Header />
+					{ hideHeader ? "":<Header/>}
 					{isFetching ? <Loader /> : <Outlet />}
 				</div>
 				<Toaster richColors />

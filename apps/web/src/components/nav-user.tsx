@@ -34,15 +34,7 @@ import { authClient } from "@/lib/auth-client"
 import { Skeleton } from "./ui/skeleton"
 import { Button } from "./ui/button"
 
-export function NavUser({
-  user,
-}: {
-  user: {
-    name: string
-    email: string
-    avatar: string
-  }|null
-}) {
+export function NavUser() {
   const { isMobile } = useSidebar()
 	const navigate = useNavigate();
 	const { data: session, isPending } = authClient.useSession();

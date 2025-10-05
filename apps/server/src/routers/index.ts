@@ -1,6 +1,8 @@
 import { protectedProcedure, publicProcedure, router } from "../lib/trpc";
+import { workFlowRouter } from "./workFlow";
 
 export const appRouter = router({
+	workFlow:workFlowRouter,
 	healthCheck: publicProcedure.query(() => {
 		return "OK";
 	}),

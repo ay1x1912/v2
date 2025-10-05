@@ -76,15 +76,9 @@ const data = {
     },
   ],
 }
-interface AppSidebarProps{
-  user:{
-    name:string,
-    email:string,
-    avatar:string
-  }|null
-}
 
-export function AppSidebar({ user,...props  }: React.ComponentProps<typeof Sidebar> & AppSidebarProps) {
+
+export function AppSidebar({ ...props  }: React.ComponentProps<typeof Sidebar> ) {
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
@@ -110,7 +104,7 @@ export function AppSidebar({ user,...props  }: React.ComponentProps<typeof Sideb
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={user} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   )

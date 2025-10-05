@@ -1,7 +1,7 @@
 import { relations } from "drizzle-orm";
-import { boolean, json, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, json, jsonb, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { user } from "./auth";
-
+import {type Edge, type Node }from '@xyflow/react';
 const timestamps = {
   updated_at: timestamp(),
   created_at: timestamp().defaultNow().notNull(),
@@ -10,8 +10,8 @@ const timestamps = {
 export const workFlow=pgTable("workFlow",{
  id:text().primaryKey(),
  active:boolean().default(true),
- nodeData:json(),
- edgeData:json(),
+ nodeData:jsonb().$type<Node[]>().default([]),
+ edgeData:jsonb().$type<Edge[]>().default([]),
  authorId:text().notNull(),
 ...timestamps
 })

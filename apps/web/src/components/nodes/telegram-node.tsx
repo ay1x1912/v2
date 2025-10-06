@@ -18,18 +18,13 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-type resendNodeData= {
-  label: string;
-  to:string,
-  msg:string
-};
 
 export default function TelegramNode({id ,data}:NodeProps) {
     const { setNodes,getNode } = useReactFlow();
     const nodeData=getNode(id);
-    const tokenValue=nodeData?.data.to as string
+    const tokenValue=nodeData?.data.tokenValue as string
     const msgValue=nodeData?.data.msg as string
-    const chatIdValue=nodeData?.data.msg as string
+    const chatIdValue=nodeData?.data.chatIdValue as string
 
   const handleTokenChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

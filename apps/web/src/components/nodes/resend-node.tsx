@@ -18,11 +18,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-type resendNodeData= {
-  label: string;
-  to:string,
-  msg:string
-};
 
 export default function ResendNode({id ,data}:NodeProps) {
     const { setNodes,getNode } = useReactFlow();
